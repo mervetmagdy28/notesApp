@@ -13,7 +13,7 @@ class CustomCard extends StatelessWidget {
           color: const Color(0xFFFFCD7A),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Column(
+        child:Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             ListTile (
