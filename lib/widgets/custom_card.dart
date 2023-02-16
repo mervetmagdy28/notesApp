@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 class CustomCard extends StatefulWidget {
   const CustomCard({Key? key}) : super(key: key);
-
   @override
   State<CustomCard> createState() => _CustomCardState();
 }
