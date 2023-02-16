@@ -11,7 +11,9 @@ class NotesView extends StatelessWidget {
     return Scaffold(
       body: const NotesBody() ,
       floatingActionButton: FloatingActionButton(onPressed: (){
-        showModalBottomSheet(context: context, builder: (context){
+        showModalBottomSheet(context: context, 
+            shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(15)),
+            builder: (context){
           return const BuildNewNote();
         });
       },
