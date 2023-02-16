@@ -6,7 +6,7 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding: const EdgeInsets.symmetric(vertical:7),
       child: Container(
         padding: const EdgeInsets.only(top: 24, bottom: 24, left: 10),
         decoration: BoxDecoration(
