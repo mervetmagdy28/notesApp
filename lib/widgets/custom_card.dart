@@ -12,7 +12,7 @@ class _CustomCardState extends State<CustomCard> {
   Color myColor = const Color(0xFFFFCD7A);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical:7),
       child: Container(
