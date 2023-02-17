@@ -9,7 +9,9 @@ class BuildNewNote extends StatelessWidget {
     return Column(
       children:const [
         SizedBox(height: 30,),
-        CustomTextField(),
+        CustomTextField(hint: "title"),
+        SizedBox(height: 20,),
+        CustomTextField(hint: "content", maxLines: 5,)
       ],
     );
   }
