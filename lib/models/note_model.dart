@@ -13,6 +13,7 @@ class NoteModel extends HiveObject{
   final String content;
   @HiveField(2)
   final String date;
+
    NoteModel({
     required this.title,
 
