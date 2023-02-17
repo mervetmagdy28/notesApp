@@ -69,7 +69,9 @@ class _CustomCardState extends State<CustomCard> {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Text("Build your career with Tharwat Samy", style: TextStyle(color: Colors.black.withOpacity(.5)),),
                 ),
-                trailing: IconButton( icon: const Icon(FontAwesomeIcons.trash,color: Colors.black,),onPressed: (){},),
+                trailing: IconButton( icon: const Icon(FontAwesomeIcons.trash,color: Colors.black,),
+                  onPressed: (){
+                },),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 25),
