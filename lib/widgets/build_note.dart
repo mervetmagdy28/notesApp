@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notesapp/constants.dart';
 
+import 'custom_button.dart';
 import 'custom_text_field.dart';
 class BuildNewNote extends StatelessWidget {
   const BuildNewNote({Key? key}) : super(key: key);
@@ -8,10 +10,13 @@ class BuildNewNote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children:const [
-        SizedBox(height: 30,),
+        Spacer(flex: 1,),
         CustomTextField(hint: "title"),
-        SizedBox(height: 20,),
-        CustomTextField(hint: "content", maxLines: 5,)
+        Spacer(flex: 1,),
+        CustomTextField(hint: "content", maxLines: 5,),
+        Spacer(flex: 8,),
+        CustomButton(text: 'Add',),
+        Spacer(flex: 1,),
       ],
     );
   }
