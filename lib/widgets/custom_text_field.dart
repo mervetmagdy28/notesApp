@@ -10,17 +10,17 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextField(
-        cursorColor: KPrimaryColor,
+        cursorColor: kPrimaryColor,
         maxLines: maxLines,
         decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(color: KPrimaryColor),
+            hintStyle: const TextStyle(color: kPrimaryColor),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: Colors.white)
             ),
             enabledBorder: buildOutlineInputBorder(clr: Colors.white),
-            focusedBorder: buildOutlineInputBorder(clr: KPrimaryColor)
+            focusedBorder: buildOutlineInputBorder(clr: kPrimaryColor)
         ),
       ),
     );
