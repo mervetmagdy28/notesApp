@@ -1,58 +1,26 @@
 import 'package:flutter/material.dart';
-import 'custom_button.dart';
-import 'custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:notesapp/cubits/add_note_cubit/add_note_cubit.dart';
+import 'form_note.dart';
+
 class BuildNewNote extends StatelessWidget {
   const BuildNewNote({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const FormNote();
-  }
-}
-
-class FormNote extends StatefulWidget {
-  const FormNote({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<FormNote> createState() => _FormNoteState();
-}
-
-class _FormNoteState extends State<FormNote> {
-  GlobalKey<FormState> formKey= GlobalKey();
-  AutovalidateMode autoValidateMode=AutovalidateMode.disabled;
-  String? title, subTitle;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autoValidateMode,
-
-      child: Column(
-        children: [
-          const Spacer(flex: 1,),
-          CustomTextField(hint: "title",
-              onSaved: (value){
-            title=value;
-          }),
-          const Spacer(flex: 1,),
-          CustomTextField(hint: "content", maxLines: 5, onSaved: (value){
-            subTitle=value;
-          }),
-          const Spacer(flex: 8,),
-          CustomButton(text: 'Add',onTap: (){
-            if (formKey.currentState!.validate()){
-              formKey.currentState!.save();
-            }else{
-              autoValidateMode=AutovalidateMode.always;
-              setState(() {
-
-              });
-            }
-          },),
-          const Spacer(flex: 1,),
-        ],
+    return SingleChildScrollView(
+      child: BlocConsumer<AddNoteCubit,AddNoteState>(
+        listener: (context, state){
+          if (state is AddNoteFailure){
+            print(state.errMessage);
+          }
+        },
+        builder: (context, state) {
+          return ModalProgressHUD(
+              inAsyncCall: state is AddNoteLoading ?true:false,
+              child: const FormNote());
+        }
       ),
     );
   }
