@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:notesapp/views/edit_note_view.dart';
 class CustomCard extends StatefulWidget {
   const CustomCard({Key? key}) : super(key: key);

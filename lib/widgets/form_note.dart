@@ -18,36 +18,40 @@ class FormNote extends StatefulWidget {
 }
 
 class _FormNoteState extends State<FormNote> {
-
   Color myColor = const Color(0xFFFFCD7A);
-  GlobalKey<FormState> formKey= GlobalKey();
-  AutovalidateMode autoValidateMode=AutovalidateMode.disabled;
+  GlobalKey<FormState> formKey = GlobalKey();
+  AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title, subTitle;
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       autovalidateMode: autoValidateMode,
-
       child: Column(
         children: [
-          const Spacer(flex: 1,),
+          const SizedBox(
+            height: 20,
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 10, top: 10, bottom: 10),
+            padding: const EdgeInsets.only(
+                right: 10,
+                left: 10,
+                bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       showDialog(
                           context: context,
-                          builder: (BuildContext context){
+                          builder: (BuildContext context) {
                             return AlertDialog(
                               title: const Text('Pick a color!'),
                               content: SingleChildScrollView(
                                 child: ColorPicker(
                                   pickerColor: myColor, //default color
-                                  onColorChanged: (Color color){ //on color picked
+                                  onColorChanged: (Color color) {
+                                    //on color picked
                                     setState(() {
                                       myColor = color;
                                     });
@@ -56,54 +60,72 @@ class _FormNoteState extends State<FormNote> {
                               ),
                               actions: <Widget>[
                                 ElevatedButton(
-                                  style:ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(kPrimaryColor),
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        kPrimaryColor),
                                   ),
-                                  child: const Text('DONE', style: TextStyle(color: Colors.white),),
+                                  child: const Text(
+                                    'DONE',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                   onPressed: () {
-                                    Navigator.of(context).pop(); //dismiss the color picker
+                                    Navigator.of(context)
+                                        .pop(); //dismiss the color picker
                                   },
                                 ),
                               ],
                             );
-                          }
-                      );
-
+                          });
                     },
-                    child: const Icon(Icons.color_lens,)
-                ),
+                    child: const Icon(
+                      Icons.color_lens,
+                    )),
               ],
             ),
           ),
-          CustomTextField(hint: "title",
-              onSaved: (value){
-                title=value;
+          CustomTextField(
+              hint: "title",
+              onSaved: (value) {
+                title = value;
               }),
-          const Spacer(flex: 1,),
-          CustomTextField(hint: "content", maxLines: 5, onSaved: (value){
-            subTitle=value;
-          }),
-          const Spacer(flex: 8,),
+          const SizedBox(
+            height: 10,
+          ),
+          CustomTextField(
+              hint: "content",
+              maxLines: 5,
+              onSaved: (value) {
+                subTitle = value;
+              }),
+          const SizedBox(
+            height: 40,
+          ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
-  builder: (context, state) {
-    return CustomButton(
-            isLoading: state is AddNoteLoading?true:false,
-            text: 'Add',onTap: (){
-            if (formKey.currentState!.validate()){
-              formKey.currentState!.save();
+            builder: (context, state) {
+              return CustomButton(
+                isLoading: state is AddNoteLoading ? true : false,
+                text: 'Add',
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
 
-              var noteModel=NoteModel(title: title!, date: DateTime.now().toString(), content: subTitle!,color: myColor.value);
-              BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
-            }else{
-              autoValidateMode=AutovalidateMode.always;
-              setState(() {
-
-              });
-            }
-          },);
-  },
-),
-          const Spacer(flex: 1,),
+                    var noteModel = NoteModel(
+                        title: title!,
+                        date: DateTime.now().toString(),
+                        content: subTitle!,
+                        color: myColor.value);
+                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                  } else {
+                    autoValidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              );
+            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );
