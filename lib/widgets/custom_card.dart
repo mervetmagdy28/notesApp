@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notesapp/constants.dart';
 import 'package:notesapp/models/note_model.dart';
 
 import '../views/edit_note_view.dart';
 
 class CustomCard extends StatelessWidget {
-   CustomCard({Key? key, required this.note}) : super(key: key);
+   const CustomCard({Key? key, required this.note}) : super(key: key);
   final NoteModel note;
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,24 @@ class CustomCard extends StatelessWidget {
                 ),
                 trailing: IconButton( icon: const Icon(FontAwesomeIcons.trash,color: Colors.black,),
                   onPressed: (){
+                  showDialog(
+                    context: context,
+                    builder:(context)=> AlertDialog(
+                      title: const Text("Do You want to Delete it?"),
+                      shape: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      actions: [
+                      TextButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, child: const Text("NO",style: TextStyle(color: Colors.white),)),
+                      TextButton(onPressed: (){
+                        note.delete();
+                        Navigator.pop(context);
+                      }, child: const Text("YES", style: TextStyle(color: kPrimaryColor),)),
+                    ],),
+                  );
+
                   },),
               ),
               Padding(
