@@ -20,7 +20,7 @@ class NotesListView extends StatelessWidget {
           //print(notes.length);
           return ListView.builder(
               itemCount: notes.length, itemBuilder: (context, index) {
-            return const CustomCard();
+            return CustomCard(note: notes[index],);
           });
         },
       ),
