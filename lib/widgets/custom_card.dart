@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notesapp/constants.dart';
 import 'package:notesapp/models/note_model.dart';
 
+import '../cubits/notes_cubit/notes_cubit.dart';
 import '../views/edit_note_view.dart';
 
 class CustomCard extends StatelessWidget {
@@ -48,6 +50,7 @@ class CustomCard extends StatelessWidget {
                       TextButton(onPressed: (){
                         note.delete();
                         Navigator.pop(context);
+                        BlocProvider.of<NotesCubit>(context).fetchNotes();
                       }, child: const Text("YES", style: TextStyle(color: kPrimaryColor),)),
                     ],),
                   );

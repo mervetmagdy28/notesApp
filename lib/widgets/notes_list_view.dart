@@ -10,20 +10,17 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NotesCubit(),
-      child: BlocBuilder<NotesCubit, NotesState>(
-        builder: (context, state) {
-          List<NoteModel>notes = BlocProvider
-              .of<NotesCubit>(context)
-              .fetchNotes();
-          //print(notes.length);
-          return ListView.builder(
-              itemCount: notes.length, itemBuilder: (context, index) {
-            return CustomCard(note: notes[index],);
-          });
-        },
-      ),
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) {
+        List<NoteModel>notes = BlocProvider
+            .of<NotesCubit>(context)
+            .notes??[];
+        //print(notes.length);
+        return ListView.builder(
+            itemCount: notes.length, itemBuilder: (context, index) {
+          return CustomCard(note: notes[index],);
+        });
+      },
     );
   }
 }
