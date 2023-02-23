@@ -5,9 +5,14 @@ import 'package:notesapp/models/note_model.dart';
 
 import 'custom_card.dart';
 
-class NotesListView extends StatelessWidget {
+class NotesListView extends StatefulWidget {
   const NotesListView({Key? key}) : super(key: key);
 
+  @override
+  State<NotesListView> createState() => _NotesListViewState();
+}
+
+class _NotesListViewState extends State<NotesListView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NotesCubit, NotesState>(
@@ -15,8 +20,8 @@ class NotesListView extends StatelessWidget {
         List<NoteModel>notes = BlocProvider
             .of<NotesCubit>(context)
             .notes??[];
-        //print(notes.length);
         return ListView.builder(
+          reverse: true,
             itemCount: notes.length, itemBuilder: (context, index) {
           return CustomCard(note: notes[index],);
         });

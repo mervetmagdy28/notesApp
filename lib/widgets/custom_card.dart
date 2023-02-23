@@ -7,21 +7,27 @@ import 'package:notesapp/models/note_model.dart';
 import '../cubits/notes_cubit/notes_cubit.dart';
 import '../views/edit_note_view.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomCard extends StatefulWidget {
    const CustomCard({Key? key, required this.note}) : super(key: key);
   final NoteModel note;
+
+  @override
+  State<CustomCard> createState() => _CustomCardState();
+}
+
+class _CustomCardState extends State<CustomCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical:7),
       child: GestureDetector(
         onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> EditNoteView(note: note,)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> EditNoteView(note: widget.note,)));
         },
         child: Container(
           padding: const EdgeInsets.only(top: 24, bottom: 24, left: 10),
           decoration: BoxDecoration(
-            color: Color(note.color),
+            color: Color(widget.note.color),
             borderRadius: BorderRadius.circular(20),
           ),
           child:Column(
@@ -29,10 +35,10 @@ class CustomCard extends StatelessWidget {
             children: [
 
               ListTile (
-                title: Text(note.title, style: const TextStyle(color: Colors.black, fontSize: 24),),
+                title: Text(widget.note.title, style: const TextStyle(color: Colors.black, fontSize: 24),),
                 subtitle: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Text(note.content, style: TextStyle(color: Colors.black.withOpacity(.5)),),
+                  child: Text(widget.note.content, style: TextStyle(color: Colors.black.withOpacity(.5)),),
                 ),
                 trailing: IconButton( icon: const Icon(FontAwesomeIcons.trash,color: Colors.black,),
                   onPressed: (){
@@ -48,7 +54,7 @@ class CustomCard extends StatelessWidget {
                         Navigator.pop(context);
                       }, child: const Text("NO",style: TextStyle(color: Colors.white),)),
                       TextButton(onPressed: (){
-                        note.delete();
+                        widget.note.delete();
                         Navigator.pop(context);
                         BlocProvider.of<NotesCubit>(context).fetchNotes();
                       }, child: const Text("YES", style: TextStyle(color: kPrimaryColor),)),
@@ -59,7 +65,7 @@ class CustomCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 25),
-                child: Text(note.date,style: TextStyle(color: Colors.black.withOpacity(.5), ),),
+                child: Text(widget.note.date,style: TextStyle(color: Colors.black.withOpacity(.5), ),),
               )
             ],
           ),

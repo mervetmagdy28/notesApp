@@ -9,7 +9,7 @@ final NoteModel note;
   @override
   Widget build(BuildContext context) {
       return  Scaffold(
-        body: EditNoteBody(note: note),
+        body: EditNoteBody(not: note),
       );
   }
 }
